@@ -96,17 +96,28 @@ export default function RegistrationScreen({ onLogin }) {
               }}
               style={styles.hidePasswordButton}
             >
-              <Text styles={styles.hidePasswordText}>Показати</Text>
+              <Text
+                styles={styles.hidePasswordText}
+                style={{ color: "#1B4371" }}
+              >
+                Показати
+              </Text>
             </Pressable>
 
             <Pressable style={styles.registrationButton}>
-              <Text styles={styles.registrationButtonText}>
+              <Text
+                styles={styles.registrationButtonText}
+                style={{ color: "white" }}
+              >
                 Зареєструватися
               </Text>
             </Pressable>
 
             <Pressable onPress={() => onLogin()} style={styles.logInButton}>
-              <Text styles={styles.registrationButtonText}>
+              <Text
+                styles={styles.registrationButtonText}
+                style={{ color: "#1B4371" }}
+              >
                 Вже є акаунт? Увійти
               </Text>
             </Pressable>
@@ -117,7 +128,7 @@ export default function RegistrationScreen({ onLogin }) {
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
@@ -189,7 +200,7 @@ const styles = StyleSheet.create({
   hidePasswordButton: {
     position: "absolute",
     top: 215,
-    left: 250,
+    left: 270,
   },
   hidePasswordText: {
     fontFamily: "Roboto",
@@ -219,7 +230,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     textAlign: "center",
-    color: "#FFFFFF",
+    color: "white",
   },
   logInButton: {
     alignItems: "center",

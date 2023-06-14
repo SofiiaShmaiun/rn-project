@@ -10,6 +10,8 @@ import {
   Keyboard,
 } from "react-native";
 
+import { styles } from "./RegistrationScreen";
+
 export default function RegistrationScreen({ onRegister }) {
   const [isShowPassword, setisShowPassword] = useState(true);
   const [isEmailFocused, setEmailFocused] = useState(false);
@@ -23,7 +25,9 @@ export default function RegistrationScreen({ onRegister }) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View styles={styles.formContainer}>
-            <Text style={styles.header}>Увійти</Text>
+            <Text style={{ ...styles.header, ...loginStyles.header }}>
+              Увійти
+            </Text>
 
             <TextInput
               onBlur={() => setEmailFocused(false)}
@@ -51,25 +55,37 @@ export default function RegistrationScreen({ onRegister }) {
               onPress={() => {
                 setisShowPassword(!isShowPassword);
               }}
-              style={styles.hidePasswordButton}
+              style={loginStyles.hidePasswordButton}
             >
-              <Text styles={styles.hidePasswordText} color="#1B4371">
+              <Text
+                styles={styles.hidePasswordText}
+                style={{ color: "#1B4371" }}
+              >
                 Показати
               </Text>
             </Pressable>
 
-            <Pressable onPress={() => null} style={styles.loginButton}>
-              <Text styles={styles.loginButtonText} color="#FFFFFF">
+            <Pressable onPress={() => null} style={loginStyles.loginButton}>
+              <Text
+                styles={loginStyles.loginButtonText}
+                style={{ color: "white" }}
+              >
                 Увійти
               </Text>
             </Pressable>
 
             <Pressable
               onPress={() => onRegister()}
-              style={styles.registrationButton}
+              style={loginStyles.registrationButton}
             >
-              <Text styles={styles.registrationButtonText} color="#1B4371">
-                Немає акаунту? Зареєструватися
+              <Text
+                styles={loginStyles.registrationButtonText}
+                style={{ color: "#1B4371" }}
+              >
+                Немає акаунту?{" "}
+                <Text style={{ textDecorationLine: "underline" }}>
+                  Зареєструватися
+                </Text>
               </Text>
             </Pressable>
           </View>
@@ -79,67 +95,14 @@ export default function RegistrationScreen({ onRegister }) {
   );
 }
 
-const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-  },
-  container: {
-    position: "absolute",
-    width: "100%",
-    bottom: 0,
-    backgroundColor: "white",
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    height: "67%",
-    alignItems: "center",
-  },
-  formContainer: {
-    flex: 1,
-  },
+const loginStyles = StyleSheet.create({
   header: {
-    fontFamily: "Roboto",
-    fontStyle: "normal",
-    fontWeight: 500,
-    fontSize: 30,
-    lineHeight: 35,
-    letterSpacing: 1.17,
-    color: "#212121",
     marginVertical: 32,
-    borderRadius: 6,
-    textAlign: "center",
-    fontSize: 30,
-    fontWeight: 700,
-  },
-  textInput: {
-    height: 50,
-    width: 343,
-    paddingVertical: 16,
-    paddingLeft: 16,
-    fontFamily: "Roboto",
-    fontStyle: "normal",
-    fontWeight: "medium",
-    fontSize: 16,
-    lineHeight: 19,
-    borderRadius: 8,
-    marginBottom: 16,
-    color: "#BDBDBD",
-    borderWidth: 1,
-    borderColor: "#E8E8E8",
-    backgroundColor: "#F6F6F6",
   },
   hidePasswordButton: {
     position: "absolute",
     top: 180,
-    left: 250,
-  },
-  hidePasswordText: {
-    fontFamily: "Roboto",
-    fontStyle: "normal",
-    fontWeight: "regular",
-    fontSize: 16,
-    lineHeight: 19,
-    color: "#1B4371",
-    backgroundColor: "transparent",
+    left: 270,
   },
   loginButton: {
     alignItems: "center",
@@ -172,23 +135,5 @@ const styles = StyleSheet.create({
     fontWeight: "medium",
     fontSize: 16,
     lineHeight: 19,
-  },
-
-  focusedTextInput: {
-    height: 50,
-    width: 343,
-    paddingVertical: 16,
-    paddingLeft: 16,
-    fontFamily: "Roboto",
-    fontStyle: "normal",
-    fontWeight: "medium",
-    fontSize: 16,
-    lineHeight: 19,
-    color: "#212121",
-    borderWidth: 2,
-    borderColor: "#FF6C00",
-    backgroundColor: "white",
-    borderRadius: 8,
-    marginBottom: 16,
   },
 });
