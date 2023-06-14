@@ -1,8 +1,8 @@
 {
-  "name": "rn-project",
+  "name": "react-native-project",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
-  "homepage": "http://SofiiaShmaiun.github.io/rn-project",
+  "homepage": "http://SofiiaShmaiun.github.io/react-native-project",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
