@@ -1,9 +1,7 @@
-// import { ImageBackground } from "react-native-web";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
-import RegistrationScreen from "./src/Screens/RegistrationScreen";
-import { useFonts } from "expo-font";
 import { useState } from "react";
+import { useFonts } from "expo-font";
+import { StyleSheet, View, Image } from "react-native";
+import RegistrationScreen from "./src/Screens/RegistrationScreen";
 import LoginScreen from "./src/Screens/LoginScreen";
 
 export default function App() {
@@ -14,25 +12,30 @@ export default function App() {
     "Inter-Medium": require("./src/assets/fonts/Inter/Inter-Medium.ttf"),
   });
 
-  const [login, setLogin] = useState(false);
+  const [isUserRegistered, setIsUserRegistered] = useState(false);
 
   if (!fontsLoaded) {
     return null;
   }
-  const handleLogIn = () => {
-    setLogin(true);
+  const handleLogin = () => {
+    setIsUserRegistered(true);
+  };
+
+  const handleRegister = () => {
+    setIsUserRegistered(false);
   };
 
   return (
     <View style={styles.container}>
-      <ImageBackground
+      <Image
         source={require("./src/img/background.jpg")}
-        resizeMode="cover"
-        style={styles.image}
-      >
-        {login === false ? <RegistrationScreen onLogin={handleLogIn} /> : <LoginScreen />}
-      </ImageBackground>
-      <StatusBar />
+        style={styles.backgroundImage}
+      />
+      {isUserRegistered === false ? (
+        <RegistrationScreen onLogin={handleLogin} />
+      ) : (
+        <LoginScreen onRegister={handleRegister} />
+      )}
     </View>
   );
 }
@@ -40,9 +43,12 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
   },
-  image: {
+  backgroundImage: {
     flex: 1,
-    justifyContent: "center",
+    width: "100%",
+    resizeMode: "cover",
+    position: "absolute",
   },
 });
