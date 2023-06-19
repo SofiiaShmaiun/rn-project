@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Button,
 } from "react-native";
 
 import Svg, { Path } from "react-native-svg";
@@ -18,6 +19,13 @@ export default function RegistrationScreen({ onLogin }) {
   const [isLoginFocused, setLoginFocused] = useState(false);
   const [isEmailFocused, setEmailFocused] = useState(false);
   const [isPasswordFocused, setPasswordFocused] = useState(false);
+  const [login, setLogin] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const handleRegister = () => {
+    console.log(login, email, password);
+  };
 
   return (
     <KeyboardAvoidingView
@@ -64,6 +72,8 @@ export default function RegistrationScreen({ onLogin }) {
               style={
                 isLoginFocused ? styles.focusedTextInput : styles.textInput
               }
+              onChangeText={setLogin}
+              value={login}
               placeholder="Логін"
               type="text"
               name="login"
@@ -74,6 +84,8 @@ export default function RegistrationScreen({ onLogin }) {
               style={
                 isEmailFocused ? styles.focusedTextInput : styles.textInput
               }
+              onChangeText={setEmail}
+              value={email}
               placeholder="Адреса електронної пошти"
               type="email"
               name="email"
@@ -84,6 +96,8 @@ export default function RegistrationScreen({ onLogin }) {
               style={
                 isPasswordFocused ? styles.focusedTextInput : styles.textInput
               }
+              onChangeText={setPassword}
+              value={password}
               placeholder="Пароль"
               secureTextEntry={isShowPassword}
               type="password"
@@ -104,7 +118,10 @@ export default function RegistrationScreen({ onLogin }) {
               </Text>
             </Pressable>
 
-            <Pressable style={styles.registrationButton}>
+            <Pressable
+              style={styles.registrationButton}
+              onPress={handleRegister}
+            >
               <Text
                 styles={styles.registrationButtonText}
                 style={{ color: "white" }}

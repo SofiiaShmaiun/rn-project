@@ -16,6 +16,12 @@ export default function RegistrationScreen({ onRegister }) {
   const [isShowPassword, setisShowPassword] = useState(true);
   const [isEmailFocused, setEmailFocused] = useState(false);
   const [isPasswordFocused, setPasswordFocused] = useState(false);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const handleLogin = () => {
+    console.log(email, password);
+  };
 
   return (
     <KeyboardAvoidingView
@@ -35,6 +41,8 @@ export default function RegistrationScreen({ onRegister }) {
               style={
                 isEmailFocused ? styles.focusedTextInput : styles.textInput
               }
+              onChangeText={setEmail}
+              value={email}
               placeholder="Адреса електронної пошти"
               type="email"
               name="email"
@@ -45,6 +53,8 @@ export default function RegistrationScreen({ onRegister }) {
               style={
                 isPasswordFocused ? styles.focusedTextInput : styles.textInput
               }
+              onChangeText={setPassword}
+              value={password}
               placeholder="Пароль"
               secureTextEntry={isShowPassword}
               type="password"
@@ -65,7 +75,7 @@ export default function RegistrationScreen({ onRegister }) {
               </Text>
             </Pressable>
 
-            <Pressable onPress={() => null} style={loginStyles.loginButton}>
+            <Pressable onPress={handleLogin} style={loginStyles.loginButton}>
               <Text
                 styles={loginStyles.loginButtonText}
                 style={{ color: "white" }}
