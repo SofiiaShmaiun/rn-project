@@ -1,8 +1,12 @@
-import { useState } from "react";
+import "react-native-gesture-handler";
 import { useFonts } from "expo-font";
-import { StyleSheet, View, Image } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
 import RegistrationScreen from "./src/Screens/RegistrationScreen";
 import LoginScreen from "./src/Screens/LoginScreen";
+import Home from "./src/Screens/Home";
+import CommentsScreen from "./src/Screens/CommentsScreen";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -12,43 +16,47 @@ export default function App() {
     "Inter-Medium": require("./src/assets/fonts/Inter/Inter-Medium.ttf"),
   });
 
-  const [isUserRegistered, setIsUserRegistered] = useState(false);
-
   if (!fontsLoaded) {
     return null;
   }
-  const handleLogin = () => {
-    setIsUserRegistered(true);
-  };
 
-  const handleRegister = () => {
-    setIsUserRegistered(false);
-  };
+  const MainStack = createStackNavigator();
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require("./src/img/background.jpg")}
-        style={styles.backgroundImage}
-      />
-      {isUserRegistered === false ? (
-        <RegistrationScreen onLogin={handleLogin} />
-      ) : (
-        <LoginScreen onRegister={handleRegister} />
-      )}
-    </View>
+    <NavigationContainer>
+      <MainStack.Navigator initialRouteName="Profile">
+        <MainStack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <MainStack.Screen
+          name="Registration"
+          component={RegistrationScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <MainStack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <MainStack.Screen
+          name="Comments"
+          component={CommentsScreen}
+          options={{
+            title: "Коментарі",
+            headerTitleAlign: "center",
+          }}
+        />
+      </MainStack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "100%",
-  },
-  backgroundImage: {
-    flex: 1,
-    width: "100%",
-    resizeMode: "cover",
-    position: "absolute",
-  },
-});

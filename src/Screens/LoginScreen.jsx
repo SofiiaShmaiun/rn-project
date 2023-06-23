@@ -8,7 +8,9 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Image,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { styles } from "./RegistrationScreen";
 
@@ -19,15 +21,17 @@ export default function RegistrationScreen({ onRegister }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const handleLogin = () => {
-    console.log(email, password);
-  };
+  const navigation = useNavigation();
 
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.mainContainer}
     >
+      <Image
+        source={require("../img/background.jpg")}
+        style={styles.backgroundImage}
+      />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View styles={styles.formContainer}>
@@ -75,7 +79,10 @@ export default function RegistrationScreen({ onRegister }) {
               </Text>
             </Pressable>
 
-            <Pressable onPress={handleLogin} style={loginStyles.loginButton}>
+            <Pressable
+              onPress={() => navigation.navigate("Home")}
+              style={loginStyles.loginButton}
+            >
               <Text
                 styles={loginStyles.loginButtonText}
                 style={{ color: "white" }}
@@ -85,7 +92,7 @@ export default function RegistrationScreen({ onRegister }) {
             </Pressable>
 
             <Pressable
-              onPress={() => onRegister()}
+              onPress={() => navigation.navigate("Registration")}
               style={loginStyles.registrationButton}
             >
               <Text

@@ -9,12 +9,12 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  Button,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import Svg, { Path } from "react-native-svg";
 
-export default function RegistrationScreen({ onLogin }) {
+export default function RegistrationScreen() {
   const [isShowPassword, setisShowPassword] = useState(true);
   const [isLoginFocused, setLoginFocused] = useState(false);
   const [isEmailFocused, setEmailFocused] = useState(false);
@@ -23,15 +23,17 @@ export default function RegistrationScreen({ onLogin }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const handleRegister = () => {
-    console.log(login, email, password);
-  };
+  const navigation = useNavigation();
 
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.mainContainer}
     >
+      <Image
+        source={require("../img/background.jpg")}
+        style={styles.backgroundImage}
+      />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.photoContainer}>
@@ -120,7 +122,7 @@ export default function RegistrationScreen({ onLogin }) {
 
             <Pressable
               style={styles.registrationButton}
-              onPress={handleRegister}
+              onPress={() => navigation.navigate("Home")}
             >
               <Text
                 styles={styles.registrationButtonText}
@@ -130,7 +132,10 @@ export default function RegistrationScreen({ onLogin }) {
               </Text>
             </Pressable>
 
-            <Pressable onPress={() => onLogin()} style={styles.logInButton}>
+            <Pressable
+              onPress={() => navigation.navigate("Login")}
+              style={styles.logInButton}
+            >
               <Text
                 styles={styles.registrationButtonText}
                 style={{ color: "#1B4371" }}
